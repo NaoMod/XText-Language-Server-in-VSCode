@@ -1,0 +1,20 @@
+grammar naomod.family.Family with org.eclipse.xtext.common.Terminals
+
+generate family "http://www.family.naomod/Family"
+
+Family:
+	members+=Person*
+	relations+=Relation*
+;
+
+Person:
+	'Person' firstName=NAME lastName=NAME 'id=' name=ID ';'
+;
+
+Relation:
+	person=[Person] 'isChildOf' parentOne=[Person] 'and' parentTwo=[Person] ';'
+;
+
+terminal NAME:
+	'A'..'Z'('a'..'z')*('-''A'..'Z'('a'..'z')*)?
+;

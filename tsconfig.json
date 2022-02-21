@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "inlineSources": false,
+        "declaration": true,
+        "stripInternal": true,
+        "lib": [ "es6" ],
+        "outDir": "out",
+        "rootDir": "src"
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        ".vscode-test"
+    ],
+    "references": [
+        { "path": "./client" }
+    ]
+}

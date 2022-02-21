@@ -1,0 +1,66 @@
+:imagesdir: images/
+
+= XText DSL Language Server in VSCode
+
+This project contains an https://www.eclipse.org/Xtext[XText] project describing a very simple DSL to represent families. A language server can automatically be produced from this XText project and archived into a fat jar. This jar is then used in a https://code.visualstudio.com[Visual Studio Code] extension. By convention, the file containing programs written in this DSL have the '.fml' extension and will be referred to as FML files.
+
+The requirements to manipulate this project are :
+
+ * JDK between [9, 17[
+ * https://maven.apache.org/[Maven]
+ * VSCode 1.49.0 or superior
+ * https://nodejs.org/en/[Node.js]
+
+== Server Implementation with XText
+
+=== Architecture
+
+The folder _server/naomod.family.parent_ is the root folder for the XText project. It contains 3 modules :
+* _naomod.family_ : Contains the defintion of our DSL. The grammar is defined in _src/naomod/family/Family.xtext_ while the static semantics are implemented in _src_maomod/family/validation/FamilyValidator.java_.
+
+image:family_xtext.png[Family DSL definition]
+
+* _naomod.family.ide_ : contains information about the IDE generated for our DSL. Nothing was manually changes in this module.
+* _naomod.family.tests_ : Contains tests for the other modules. There is currently a parsing test for a simple example of an FML file.
+
+=== Build
+
+Run : `make buildServer`
+
+This command compiles the XText project, then generates a fatjar in _server/naomod.family.parent/naomod.family.ide/target/_ and copies it into _client/src/_.
+
+== VSCode Extension
+
+=== Architecture
+
+The file _client/syntaxes/family.tmLanguage.json_ describes the syntax highlighting rules for the Family DSL. Since version 3.16.0 of LSP, it is possible to integrate this functionality in the language server, thanks to 'Semantic Tokens'. However, XText seems to either not support it (despite what's reported on their documentation) or to require specific configuration.
+
+The file _client/src/naomod.family.ide-1.0.0-SNAPSHOT-ls.jar_ is the fatjar of the server generated during the server build.
+
+The file _client/src/extension.ts_ specifies the behavior for the activation and deactivation of our extension. During the activation, the language server is launched from the fatjar. It is automatically stopped during the deactivation.
+
+=== Build
+
+Run : `make buildClient` to fetch all the dependencies.
+
+Then, open this project inside VSCode. Using the Run and Debug tab, start the 'Lauch Client' configuration.
+
+image:run_and_debug.png[Launch Client configuration]
+
+This will start a new VSCode instance with our extension activated. To test it, you can open the file _examples/sample.fml_. You can see the content of the file benefits from syntactic coloration as well as static analysis thanks to the language server.
+
+image:sample_fml.png[Sample FML using our language server]
+
+You can play around using the syntax showed in the example, either by creating a new file or editing the existing one.
+
+== Build Shortcuts
+
+`make clean` to clean the build files for both client and server.
+
+`make build` to build both client and server.
+
+== References
+
+* https://microsoft.github.io/language-server-protocol/overviews/lsp/overview/
+* https://www.eclipse.org/Xtext/documentation/340_lsp_support.html
+* https://medium.com/ballerina-techblog/implementing-a-language-server-how-hard-can-it-be-part-1-introduction-c915d2437076

@@ -1,0 +1,49 @@
+{
+    "name": "XText-Language-Server-in-VSCode",
+    "displayName": "Xtext DSL Language Server in VS Code",
+    "description": "A simple DSL language server example for VSCode",
+    "version": "0.0.1",
+    "publisher": "naomod",
+    "license": "EPL-1.0",
+    "engines": {
+        "vscode": "^1.49.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:family"
+    ],
+    "main": "./client/out/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "family",
+                "aliases": [
+                    "family"
+                ],
+                "extensions": [
+                    ".fml"
+                ],
+                "configuration": "./client/family.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "family",
+                "scopeName": "text.family",
+                "path": "./client/syntaxes/family.tmLanguage.json"
+            }
+        ],
+        "commands": []
+    },
+    "scripts": {
+        "prepublish": "tsc -p ./client",
+        "compile": "tsc -p ./client",
+        "watch": "tsc -w -p ./client",
+        "update-vscode": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "XText-Language-Server-in-VSCode-client": "file:client"
+    }
+}

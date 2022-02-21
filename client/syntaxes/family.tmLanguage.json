@@ -1,0 +1,26 @@
+{
+    "name": "Family DSL",
+    "scopeName": "text.family",
+    "fileTypes": [
+        "fml"
+    ],
+    "repository": {
+        "general": {
+            "patterns": [
+                {
+                    "include": "#keyword"
+                }
+            ]
+        },
+        "keyword": {
+            "name": "keyword.control.family",
+            "match": "\\b(Person|isChildOf|and|id)\\b"
+        }
+    },
+    "patterns": [
+        {
+            "include": "#general"
+        }
+    ],
+    "uuid": "8383e49a-fa0d-4bb5-827b-10e8abb294ca"
+}

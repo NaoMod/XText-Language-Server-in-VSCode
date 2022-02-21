@@ -1,0 +1,20 @@
+{
+    "name": "XText-Language-Server-in-VSCode-client",
+    "displayName": "Client for Xtext DSL Language Server in VS Code",
+    "description": "A VSCode client for a simple DSL example",
+    "version": "0.0.1",
+    "publisher": "naomod",
+    "license": "EPL-1.0",
+    "engines": {
+        "vscode": "^1.49.0"
+    },
+    "devDependencies": {
+        "@types/node": "^13.13.25",
+        "@types/vscode": "^1.49.0",
+        "vscode-test": "^1.4.0",
+        "typescript": "^3.9.7"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^6.1.3"
+    }
+}

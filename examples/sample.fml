@@ -1,0 +1,6 @@
+Person John Doe id=a;
+Person Jane Doe id=b;
+Person Joe Doe id=c;
+
+c isChildOf a and b;
+a isChildOf b and c;
