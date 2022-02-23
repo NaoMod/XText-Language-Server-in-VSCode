@@ -4,11 +4,14 @@
 
 This project contains an https://www.eclipse.org/Xtext[XText] project describing a very simple DSL to represent families. A language server can automatically be produced from this XText project and archived into a fat jar. This jar is then used in a https://code.visualstudio.com[Visual Studio Code] extension. By convention, the file containing programs written in this DSL have the '.fml' extension and will be referred to as FML files.
 
-The requirements to manipulate this project are :
+The requirements to run the extension are :
 
  * JDK between [9, 17[
- * https://maven.apache.org/[Maven]
  * VSCode 1.49.0 or superior
+
+The build sections provided in the following documentation are optional, as output files are also included in this repository. However, you can still re-build the server and client modules, especially if you want to experiment and make changes to the original code. The following tools are required :
+
+ * https://maven.apache.org/[Maven]
  * https://nodejs.org/en/[Node.js]
 
 == Server Implementation with XText
@@ -41,9 +44,11 @@ The file _client/src/extension.ts_ specifies the behavior for the activation and
 
 === Build
 
-Run : `make buildClient` to fetch all the dependencies.
+Run : `make buildClient` to fetch all the dependencies needed to run the client.
 
-Then, open this project inside VSCode. Using the Run and Debug tab, start the 'Lauch Client' configuration.
+=== Running the Extension
+
+Open this project inside VSCode. Using the Run and Debug tab, start the 'Lauch Client' configuration.
 
 image:run_and_debug.png[Launch Client configuration]
 
