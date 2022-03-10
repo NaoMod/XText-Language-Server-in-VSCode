@@ -34,9 +34,9 @@ public class FamilyValidator extends AbstractFamilyValidator {
 		Person parentOne = relation.getParentOne();
 		Person parentTwo = relation.getParentTwo();
 		
-		if (person==parentOne) error("Parents have to be different to their child.", FamilyPackage.Literals.RELATION__PARENT_ONE);
-		if (person==parentTwo) error("Parents have to be different to their child.", FamilyPackage.Literals.RELATION__PARENT_TWO);
-		if (parentOne==parentTwo) error("Parents have to be unique.", FamilyPackage.Literals.RELATION__PARENT_TWO);
+		if (person==parentOne) error("Parents have to be different to their child.", relation, FamilyPackage.Literals.RELATION__PARENT_ONE);
+		if (person==parentTwo) error("Parents have to be different to their child.", relation, FamilyPackage.Literals.RELATION__PARENT_TWO);
+		if (parentOne==parentTwo) error("Parents have to be unique.", relation, FamilyPackage.Literals.RELATION__PARENT_TWO);
 	}
 	
 	
@@ -47,7 +47,7 @@ public class FamilyValidator extends AbstractFamilyValidator {
 	public void checkUniqueParentsRelation(Family family) {
 		Set<Person> personsWithParents = new HashSet<>();
 		for (Relation relation : family.getRelations()) {
-			if (!personsWithParents.add(relation.getPerson())) error("A person can only have one parents' declaration.", FamilyPackage.Literals.FAMILY__RELATIONS);
+			if (!personsWithParents.add(relation.getPerson())) error("A person can only have one parents' declaration.", relation, FamilyPackage.Literals.RELATION__PERSON);
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class FamilyValidator extends AbstractFamilyValidator {
 	public void checkIDsUniqueness(Family family) {
 		Set<String> ids = new HashSet<>();
 		for (Person person : family.getMembers()) {
-			if (!ids.add(person.getName())) error("IDs need to be unique.", FamilyPackage.Literals.FAMILY__MEMBERS);
+			if (!ids.add(person.getName())) error("IDs need to be unique.", person, FamilyPackage.Literals.PERSON__NAME);
 		}
 	}
 	
